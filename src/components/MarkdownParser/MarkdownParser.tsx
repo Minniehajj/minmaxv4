@@ -5,11 +5,9 @@ import React, { Key } from "react";
 import { MarkdownParserProps } from "./types";
 import Image from "next/image";
 // import { CardToolTip } from "../CardToolTip";
-import { Body, BodyProps } from "../Body";
+import { ArticleBody, ArticleBodyProps } from "../ArticleBody";
 import parseNode from "@/lib/parseNode";
 
-// export declare type FallbackResolver = (mdNode: MarkdownNode) => Promise<Node | Node[] | null>;
-// richTextFromMarkdown(md: string, fallback?: FallbackResolver): Promise<Document>;
 const MarkdownParser = ({ children = "" }: MarkdownParserProps) => {
   const body = children.replace(/[\u2018\u2019]/g, "'");
   const [data, setData] = React.useState<any>();
@@ -42,10 +40,10 @@ const MarkdownParser = ({ children = "" }: MarkdownParserProps) => {
       [BLOCKS.PARAGRAPH]: (node: any) => {
         const block = node.content.map(
           (
-            child: JSX.IntrinsicAttributes & BodyProps,
+            child: JSX.IntrinsicAttributes & ArticleBodyProps,
             index: Key | null | undefined
           ) => {
-            return <Body {...child} key={index} />;
+            return <ArticleBody {...child} key={index} />;
           }
         );
         return <p>{block}</p>;

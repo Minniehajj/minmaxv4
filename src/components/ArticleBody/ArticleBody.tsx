@@ -1,9 +1,9 @@
 import reactStringReplace from "react-string-replace";
 // import { CardToolTip } from "../CardToolTip";
 
-import { BodyProps } from "./types";
 import Link from "next/link";
-const Body = ({ ...props }: BodyProps) => {
+import { ArticleBodyProps } from ".";
+export const ArticleBody = ({ ...props }: ArticleBodyProps) => {
   let parsedBody;
   const p = /\[([\s\w\d-+_/,'’&]*)\]/g;
 
@@ -20,5 +20,3 @@ const Body = ({ ...props }: BodyProps) => {
 
   return <>{parsedBody}</>;
 };
-
-export default Body;

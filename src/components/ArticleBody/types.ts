@@ -1,7 +1,7 @@
 import React from "react";
 
-export type BodyProps = {
-  children: React.ReactNode;  
+export type ArticleBodyProps = {
+  children: React.ReactNode;
   nodeType?: string;
   data?: {
     uri?: string;
