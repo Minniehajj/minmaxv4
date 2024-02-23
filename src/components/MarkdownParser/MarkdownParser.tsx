@@ -18,17 +18,17 @@ export const MarkdownParser = async ({
   });
   const options = {
     renderNode: {
-      // [BLOCKS.EMBEDDED_ASSET]: (asset: any) => {
-      //   return (
-      //     <Image
-      //       src={"https:" + asset.data.target.sys.id}
-      //       width={asset.width || 1920}
-      //       height={asset.height || 1080}
-      //       alt={asset.data.target.sys.alt || "Image"}
-      //       quality={75}
-      //     />
-      //   );
-      // },
+      [BLOCKS.EMBEDDED_ASSET]: (asset: any) => {
+        return (
+          <Image
+            src={"https:" + asset.data.target.sys.id}
+            width={asset.width || 1920}
+            height={asset.height || 1080}
+            alt={asset.data.target.sys.alt || "Image"}
+            quality={75}
+          />
+        );
+      },
       // ["linkReference"]: (node: any) => {
       //   return <CardToolTip name={node.value} />;
       // },

@@ -20,6 +20,5 @@ export const ArticleBody = ({ ...props }: ArticleBodyProps) => {
     return <Link href={props?.data.uri}>{props?.content[0]?.value}</Link>;
   }
 
-  // return <>{props.value}</>;
   return <>{parsedBody}</>;
 };

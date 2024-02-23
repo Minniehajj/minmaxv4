@@ -4,11 +4,10 @@ import Image from "next/image";
 
 // import { Decklist } from "../../organisms/Decklist";
 // import TweetEmbed from "../TweetEmbed/TweetEmbed";
-// import { Body, BodyProps } from "../Body";
 import { Key } from "react";
 import getYoutubeId from "@/lib/getYoutubeId";
 import { ArticleBody, ArticleBodyProps } from "../ArticleBody";
-// import getYoutubeId from "../../../utils/getYoutubeId";
+import { YoutubeRenderer } from "../YoutubeRenderer";
 
 export const RenderAsset =
   (assetMap: any): any =>
@@ -34,7 +33,6 @@ export const RenderAsset =
     }
   };
 
-RenderAsset.displayName = "RenderAsset";
 export const RenderEntry =
   (entryMap: any): any =>
   (node: { data: { target: { sys: { id: number } } } }) => {
@@ -43,15 +41,10 @@ export const RenderEntry =
       return <></>;
     }
     switch (entry.__typename) {
-      // case "Video":
-      //   const videoId = getYoutubeId(entry.url);
-      //   return (
-      //     <Youtube
-      //       videoId={videoId}
-      //       title={entry.title}
-      //       iframeClassName="w-full h-full aspect-video"
-      //     />
-      //   );
+      case "Video":
+        const videoId = getYoutubeId(entry.url);
+        if (!videoId) return null;
+        return <YoutubeRenderer videoId={videoId} title={entry.title} />;
       // case "Decklist":
       // return <Decklist list={entry.list} title={entry.title} />;
       // case "TwitterEmbed":
@@ -76,8 +69,7 @@ export const RenderBlock = (): any => (node: any) => {
           return <ArticleBody {...child} key={index} />;
         }
       );
-      // return <p>{block}</p>;
-      return <></>;
+      return <p>{block}</p>;
     default:
       return <></>;
   }
