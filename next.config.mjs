@@ -2,7 +2,22 @@
 const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    domains: ["images.ctfassets.net", "c1.scryfall.com", "cards.scryfall.io"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+       
+      },
+      {
+        protocol: 'https',
+        hostname: 'c1.scryfall.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cards.scryfall.io',
+      }
+    ],
+
   },
   webpack(config) {
     config.module.rules.push({

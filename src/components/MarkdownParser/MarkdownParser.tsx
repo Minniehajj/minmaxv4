@@ -2,13 +2,13 @@ import { richTextFromMarkdown } from "@contentful/rich-text-from-markdown";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import React, { Key } from "react";
-import { MarkdownParserProps } from "./types";
+import { MarkdownParserProps } from "./MarkdownParser.types";
 import Image from "next/image";
 // import { CardToolTip } from "../CardToolTip";
 import { ArticleBody, ArticleBodyProps } from "../ArticleBody";
 import parseNode from "@/lib/parseNode";
 
-const MarkdownParser = ({ children = "" }: MarkdownParserProps) => {
+export const MarkdownParser = ({ children = "" }: MarkdownParserProps) => {
   const body = children.replace(/[\u2018\u2019]/g, "'");
   const [data, setData] = React.useState<any>();
   React.useEffect(() => {
@@ -56,5 +56,3 @@ const MarkdownParser = ({ children = "" }: MarkdownParserProps) => {
     </article>
   );
 };
-
-export default MarkdownParser;
