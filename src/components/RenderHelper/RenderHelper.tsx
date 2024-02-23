@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import Youtube from "react-youtube";
 import Image from "next/image";
 
@@ -9,9 +8,10 @@ import getYoutubeId from "@/lib/getYoutubeId";
 import { ArticleBody, ArticleBodyProps } from "../ArticleBody";
 import { YoutubeRenderer } from "../YoutubeRenderer";
 
-export const RenderAsset =
-  (assetMap: any): any =>
-  (node: { data: { target: { sys: { id: number } } } }) => {
+export const RenderAsset = (assetMap: any): any => {
+  const RenderAssetFunction = (node: {
+    data: { target: { sys: { id: number } } };
+  }) => {
     const asset = assetMap.get(node.data.target.sys.id);
     if (!asset) {
       return <></>;
@@ -32,10 +32,13 @@ export const RenderAsset =
         return <></>;
     }
   };
+  return RenderAssetFunction;
+};
 
-export const RenderEntry =
-  (entryMap: any): any =>
-  (node: { data: { target: { sys: { id: number } } } }) => {
+export const RenderEntry = (entryMap: any): any => {
+  const RenderEntryFunction = (node: {
+    data: { target: { sys: { id: number } } };
+  }) => {
     const entry = entryMap.get(node.data.target.sys.id);
     if (!entry) {
       return <></>;
@@ -53,24 +56,29 @@ export const RenderEntry =
         return <></>;
     }
   };
+  return RenderEntryFunction;
+};
 
-export const RenderBlock = (): any => (node: any) => {
-  const asset = node;
-  if (!asset) {
-    return <></>;
-  }
-  switch (asset.nodeType) {
-    case "paragraph":
-      const block = asset.content.map(
-        (
-          child: JSX.IntrinsicAttributes & ArticleBodyProps,
-          index: Key | null | undefined
-        ) => {
-          return <ArticleBody {...child} key={index} />;
-        }
-      );
-      return <p>{block}</p>;
-    default:
+export const RenderBlock = () => {
+  const RenderBlockFunction = (node: any, children: any) => {
+    const asset = node;
+    if (!asset) {
       return <></>;
-  }
+    }
+    switch (asset.nodeType) {
+      case "paragraph":
+        const block = asset.content.map(
+          (
+            child: JSX.IntrinsicAttributes & ArticleBodyProps,
+            index: Key | null | undefined
+          ) => {
+            return <ArticleBody {...child} key={index} />;
+          }
+        );
+        return <p>{block}</p>;
+      default:
+        return <></>;
+    }
+  };
+  return RenderBlockFunction;
 };
