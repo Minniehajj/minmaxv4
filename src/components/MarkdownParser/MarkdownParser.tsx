@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { richTextFromMarkdown } from "@contentful/rich-text-from-markdown";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import React, { Key } from "react";
 import { MarkdownParserProps } from "./types";
 import Image from "next/image";
-import { CardToolTip } from "../CardToolTip";
-import parseNode from "utils/parseNode";
+// import { CardToolTip } from "../CardToolTip";
 import { Body, BodyProps } from "../Body";
+import parseNode from "@/lib/parseNode";
 
 // export declare type FallbackResolver = (mdNode: MarkdownNode) => Promise<Node | Node[] | null>;
 // richTextFromMarkdown(md: string, fallback?: FallbackResolver): Promise<Document>;
@@ -38,9 +36,9 @@ const MarkdownParser = ({ children = "" }: MarkdownParserProps) => {
           />
         );
       },
-      ["linkReference"]: (node: any) => {
-        return <CardToolTip name={node.value} />;
-      },
+      // ["linkReference"]: (node: any) => {
+      //   return <CardToolTip name={node.value} />;
+      // },
       [BLOCKS.PARAGRAPH]: (node: any) => {
         const block = node.content.map(
           (
