@@ -38,25 +38,27 @@ const Hero: FC<HeroProps> = ({
       />
       <div className="prose top-1/2 right-20 mt-8 -translate-y-7 rounded border bg-opacity-80 p-2 dark:prose-invert lg:absolute lg:mt-0 lg:bg-theme-white lg:p-8 lg:dark:bg-theme-black">
         <h1>{title}</h1>
-        <p>{description}</p>
-        <p className="flex items-center gap-2 text-sm">
-          <TimerIcon />
-          {readTime} minute read
-        </p>
-        <div className="flex gap-8">
-          {authors?.map((author, index) => {
-            return (
-              <p className="flex items-center gap-4 text-sm" key={index}>
-                <Avatar.Root>
-                  <Avatar.Image
-                    className="my-0 aspect-square w-12 rounded-full"
-                    src={author?.image?.url}
-                  ></Avatar.Image>
-                </Avatar.Root>
-                {author.title}
-              </p>
-            );
-          })}
+        <div className="font-serif">
+          <p>{description}</p>
+          <p className="flex items-center gap-2 text-sm">
+            <TimerIcon />
+            {readTime} minute read
+          </p>
+          <div className="flex gap-8">
+            {authors?.map((author, index) => {
+              return (
+                <p className="flex items-center gap-4 text-sm" key={index}>
+                  <Avatar.Root>
+                    <Avatar.Image
+                      className="my-0 aspect-square w-12 rounded-full"
+                      src={author?.image?.url}
+                    ></Avatar.Image>
+                  </Avatar.Root>
+                  {author.title}
+                </p>
+              );
+            })}
+          </div>
         </div>
       </div>
       <div className="mb-12" />

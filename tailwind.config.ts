@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
-
+import typography from "@tailwindcss/typography";
+import forms from "@tailwindcss/forms";
+import radix from "tailwindcss-radix";
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -24,14 +26,12 @@ const config: Config = {
           "blue-dark": "#274868",
         },
       },
+      fontFamily: {
+        sans: ["var(--font-geist-sans)"],
+        mono: ["var(--font-geist-mono)"],
+      },
     },
   },
-  plugins: [
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/forms"),
-    require("tailwindcss-radix")({
-      variantPrefix: "rdx",
-    }),
-  ],
+  plugins: [typography, forms, radix],
 };
 export default config;

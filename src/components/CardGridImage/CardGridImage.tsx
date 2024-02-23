@@ -25,7 +25,7 @@ export const CardGridImage: FC<CardGridImageProps> = ({
         className={`${
           loaded ? "blur-none" : "blur-lg"
         } aspect-video h-full w-full object-cover`}
-        onLoadingComplete={() => setLoaded(true)}
+        onLoad={() => setLoaded(true)}
       />
     </div>
   );
