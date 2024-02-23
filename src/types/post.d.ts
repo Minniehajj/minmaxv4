@@ -36,3 +36,4 @@ export type PostProps = {
   pageBody:NodeData;
   readTime: number;
 };
+

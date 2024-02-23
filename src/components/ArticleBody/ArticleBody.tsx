@@ -11,12 +11,15 @@ export const ArticleBody = ({ ...props }: ArticleBodyProps) => {
     const body = props?.value?.replace(/[\u2018\u2019]/g, "'");
 
     parsedBody = reactStringReplace(body, p, (match, i) => (
-      <div key={`index-${i}`} className={match} />
+      <span key={`index-${i}`} className={match}>
+        {match}
+      </span>
     ));
   }
   if (props.nodeType === "hyperlink" && props?.data?.uri && props.content) {
     return <Link href={props?.data.uri}>{props?.content[0]?.value}</Link>;
   }
 
+  // return <>{props.value}</>;
   return <>{parsedBody}</>;
 };

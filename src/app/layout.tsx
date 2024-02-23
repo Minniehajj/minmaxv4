@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { cookies } from "next/headers";
 import { Nav } from "@/components/Nav";

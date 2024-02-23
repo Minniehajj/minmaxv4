@@ -24,6 +24,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-string-replace": "^1.1.1",
+    "react-youtube": "^10.1.0",
     "scryfall-api": "^3.2.5"
   },
   "devDependencies": {

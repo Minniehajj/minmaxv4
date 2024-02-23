@@ -5,6 +5,7 @@ import { FC } from "react";
 import { TimerIcon } from "@radix-ui/react-icons";
 import * as Avatar from "@radix-ui/react-avatar";
 import { HeroProps } from ".";
+import { AuthorsGroup } from "../AuthorsGroup";
 
 const Hero: FC<HeroProps> = ({
   title,
@@ -45,19 +46,10 @@ const Hero: FC<HeroProps> = ({
             {readTime} minute read
           </p>
           <div className="flex gap-8">
-            {authors?.map((author, index) => {
-              return (
-                <p className="flex items-center gap-4 text-sm" key={index}>
-                  <Avatar.Root>
-                    <Avatar.Image
-                      className="my-0 aspect-square w-12 rounded-full"
-                      src={author?.image?.url}
-                    ></Avatar.Image>
-                  </Avatar.Root>
-                  {author.title}
-                </p>
-              );
-            })}
+            <AuthorsGroup
+              authors={authors}
+              className="flex items-center gap-4 text-sm"
+            />
           </div>
         </div>
       </div>

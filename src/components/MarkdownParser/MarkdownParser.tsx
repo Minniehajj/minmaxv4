@@ -8,32 +8,27 @@ import Image from "next/image";
 import { ArticleBody, ArticleBodyProps } from "../ArticleBody";
 import parseNode from "@/lib/parseNode";
 
-export const MarkdownParser = ({ children = "" }: MarkdownParserProps) => {
+export const MarkdownParser = async ({
+  children = "",
+}: MarkdownParserProps) => {
   const body = children.replace(/[\u2018\u2019]/g, "'");
-  const [data, setData] = React.useState<any>();
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const result = await richTextFromMarkdown(body, async (mdNode) => {
-        return parseNode(mdNode) as any;
-      });
-      setData(result);
-    };
-    fetchData();
-  }, [body]);
 
+  const data = await richTextFromMarkdown(body, async (mdNode) => {
+    return parseNode(mdNode) as any;
+  });
   const options = {
     renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: (asset: any) => {
-        return (
-          <Image
-            src={"https:" + asset.data.target.sys.id}
-            width={asset.width || 1920}
-            height={asset.height || 1080}
-            alt={asset.data.target.sys.alt || "Image"}
-            quality={75}
-          />
-        );
-      },
+      // [BLOCKS.EMBEDDED_ASSET]: (asset: any) => {
+      //   return (
+      //     <Image
+      //       src={"https:" + asset.data.target.sys.id}
+      //       width={asset.width || 1920}
+      //       height={asset.height || 1080}
+      //       alt={asset.data.target.sys.alt || "Image"}
+      //       quality={75}
+      //     />
+      //   );
+      // },
       // ["linkReference"]: (node: any) => {
       //   return <CardToolTip name={node.value} />;
       // },
@@ -51,7 +46,7 @@ export const MarkdownParser = ({ children = "" }: MarkdownParserProps) => {
     },
   };
   return (
-    <article className="prose m-auto dark:prose-invert lg:prose-xl">
+    <article className="font-serif prose m-auto dark:prose-invert lg:prose-xl">
       {data && documentToReactComponents(data, options)}
     </article>
   );

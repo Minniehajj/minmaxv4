@@ -5,6 +5,7 @@ import { TimerIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Key } from "react";
 import { CardGridImage } from "../CardGridImage";
+import { AuthorsGroup } from "../AuthorsGroup";
 
 export const MoreArticles = ({
   data,
@@ -36,35 +37,10 @@ export const MoreArticles = ({
               ) : null}
 
               <div className="mt-4"></div>
-              {post.authorsCollection.items?.map(
-                (
-                  author: {
-                    image: { url: string | undefined };
-                    title: string;
-                  },
-                  index: Key
-                ) => {
-                  return (
-                    <p
-                      className="flex items-center justify-center gap-4 text-sm"
-                      key={index}
-                    >
-                      <Avatar.Root>
-                        <Avatar.Image
-                          className="my-0 aspect-square w-12 rounded-full object-cover object-top"
-                          src={
-                            author?.image?.url
-                              ? author.image.url
-                              : "placeholder.png"
-                          }
-                        ></Avatar.Image>
-                      </Avatar.Root>
-
-                      {author.title}
-                    </p>
-                  );
-                }
-              )}
+              <AuthorsGroup
+                className="flex items-center justify-center gap-4 text-sm"
+                authors={post.authorsCollection.items}
+              />
             </div>
           </Link>
         </article>
