@@ -1,13 +1,13 @@
 import Hero from "@/components/Hero/Hero";
 import { MoreArticles } from "@/components/MoreArticles";
 import { getAllPostSlugs, getAllPosts } from "@/lib/fetch/getPosts";
+import getStuff from "@/lib/scripts/indexAlgolia";
 import { draftMode } from "next/headers";
 
 const Home = async () => {
   const { isEnabled } = draftMode();
   const allPosts = await getAllPosts(isEnabled);
   const { totalPages } = await getAllPostSlugs(isEnabled);
-
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
 
