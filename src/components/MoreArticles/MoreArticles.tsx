@@ -20,7 +20,7 @@ export const MoreArticles = ({
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {data.map((post: PostProps, index: number) => (
         <article key={index} className="relative mb-4">
-          <Link href={post.slug} className="group">
+          <Link href={`/article/${post.slug}`} className="group">
             <CardGridImage
               {...post.heroImage}
               // setBackgroundImage={props.setBackgroundImage}

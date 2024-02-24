@@ -1,6 +1,18 @@
-import { MarkdownNode } from "@contentful/rich-text-from-markdown/dist/types/types";
-
 const parseNode = (node: any) => {
+  console.log("incoming node", node);
+  if (node.type === "html") {
+    let nodeType = "html";
+    if (node.value.includes("iframe")) {
+      nodeType = "iframe";
+    }
+    const newNode = {
+      type: "html",
+      nodeType: nodeType,
+      value: node.value,
+      content: [],
+    };
+    return newNode;
+  }
   if (node.type === "image") {
     const newNode = {
       data: {

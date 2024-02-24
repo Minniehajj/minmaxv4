@@ -76,6 +76,8 @@ export const RenderBlock = () => {
           }
         );
         return <p>{block}</p>;
+      case "embedded-asset-block":
+        return <RenderAsset assetMap={asset} />;
       default:
         return <></>;
     }

@@ -13,10 +13,11 @@ export const MarkdownParser = async ({
   children = "",
 }: MarkdownParserProps) => {
   const body = children.replace(/[\u2018\u2019]/g, "'");
-
   const data = await richTextFromMarkdown(body, async (mdNode) => {
     return parseNode(mdNode) as any;
   });
+
+  console.log("data", data);
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (asset: any) => {
@@ -32,6 +33,14 @@ export const MarkdownParser = async ({
       },
       ["linkReference"]: (node: any) => {
         return <CardToolTip name={node.value} />;
+      },
+      ["iframe"]: (node: any) => {
+        return (
+          <div
+            className="aspect-video"
+            dangerouslySetInnerHTML={{ __html: node.value }}
+          />
+        );
       },
       [BLOCKS.PARAGRAPH]: (node: any) => {
         const block = node.content.map(

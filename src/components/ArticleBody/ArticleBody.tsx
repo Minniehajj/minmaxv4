@@ -16,7 +16,11 @@ export const ArticleBody = ({ ...props }: ArticleBodyProps) => {
     ));
   }
   if (props.nodeType === "hyperlink" && props?.data?.uri && props.content) {
-    return <Link href={props?.data.uri}>{props?.content[0]?.value}</Link>;
+    return (
+      <Link href={props?.data.uri} target="_blank">
+        {props?.content[0]?.value}
+      </Link>
+    );
   }
 
   return <>{parsedBody}</>;
