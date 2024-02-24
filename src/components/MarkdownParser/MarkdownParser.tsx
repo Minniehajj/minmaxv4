@@ -7,6 +7,7 @@ import Image from "next/image";
 // import { CardToolTip } from "../CardToolTip";
 import { ArticleBody, ArticleBodyProps } from "../ArticleBody";
 import parseNode from "@/lib/parseNode";
+import { CardToolTip } from "../CardToolTip";
 
 export const MarkdownParser = async ({
   children = "",
@@ -29,9 +30,9 @@ export const MarkdownParser = async ({
           />
         );
       },
-      // ["linkReference"]: (node: any) => {
-      //   return <CardToolTip name={node.value} />;
-      // },
+      ["linkReference"]: (node: any) => {
+        return <CardToolTip name={node.value} />;
+      },
       [BLOCKS.PARAGRAPH]: (node: any) => {
         const block = node.content.map(
           (

@@ -3,17 +3,16 @@ import reactStringReplace from "react-string-replace";
 
 import Link from "next/link";
 import { ArticleBodyProps } from ".";
+import { CardToolTip } from "../CardToolTip";
 export const ArticleBody = ({ ...props }: ArticleBodyProps) => {
   let parsedBody;
-  const p = /\[([\s\w\d-+_/,'’&]*)\]/g;
+  const p = /\[([\s\w\d-+_/,'’&À-ÿ]*)\]/g;
 
   if (props.nodeType === "text") {
     const body = props?.value?.replace(/[\u2018\u2019]/g, "'");
 
     parsedBody = reactStringReplace(body, p, (match, i) => (
-      <span key={`index-${i}`} className={match}>
-        {match}
-      </span>
+      <CardToolTip key={`index-${i}`} name={match} />
     ));
   }
   if (props.nodeType === "hyperlink" && props?.data?.uri && props.content) {
