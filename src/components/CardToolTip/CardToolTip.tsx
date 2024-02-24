@@ -1,10 +1,14 @@
 "use client";
 import * as Tooltip from "@radix-ui/react-tooltip";
-import Image from "next/image";
-import { FC, useCallback, useEffect, useState } from "react";
+import Image, { ImageProps } from "next/image";
+import { FC, Suspense, useCallback, useEffect, useState } from "react";
 import { CardToolTipProps } from ".";
 import { Card, Cards } from "scryfall-api";
 import clsx from "clsx";
+
+const CardImage = ({ src, alt, onLoad }: ImageProps) => {
+  return <Image src={src} alt={alt} width={248} height={346} onLoad={onLoad} />;
+};
 
 export const CardToolTip: FC<CardToolTipProps> = ({
   amount,
@@ -49,27 +53,25 @@ export const CardToolTip: FC<CardToolTipProps> = ({
             <span>{name}</span>
           </button>
         </Tooltip.Trigger>
-        <Tooltip.Content className="rounded-sm">
-          {data?.image_uris && (
-            <Image
-              src={data.image_uris.png}
-              alt={data.name}
-              width={248}
-              height={346}
-              onLoadingComplete={() => setIsLoading(false)}
-            />
-          )}
-          {data?.card_faces && (
-            <Image
-              src={data.card_faces[0]?.image_uris?.png || ""}
-              alt={data.name}
-              width={248}
-              height={346}
-              onLoadingComplete={() => setIsLoading(false)}
-            />
-          )}
-          <Tooltip.Arrow />
-        </Tooltip.Content>
+        <Suspense>
+          <Tooltip.Content className="rounded-sm">
+            {data?.image_uris && (
+              <CardImage
+                src={data.image_uris.png}
+                alt={data.name}
+                onLoad={() => setIsLoading(false)}
+              />
+            )}
+            {data?.card_faces && (
+              <CardImage
+                src={data.card_faces[0]?.image_uris?.png || ""}
+                alt={data.name}
+                onLoad={() => setIsLoading(false)}
+              />
+            )}
+            <Tooltip.Arrow />
+          </Tooltip.Content>
+        </Suspense>
       </Tooltip.Root>
     </Tooltip.Provider>
   );

@@ -3,11 +3,12 @@ import { MarkdownParser } from "@/components/MarkdownParser";
 import { RichText } from "@/components/RichText";
 import { getPostAndMorePosts } from "@/lib/fetch/getPostAndMorePosts";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import * as Avatar from "@radix-ui/react-avatar";
 import { TimerIcon } from "@radix-ui/react-icons";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { draftMode } from "next/headers";
 import Image from "next/image";
-const PostPage = async ({ params }: { params: { slug: string } }) => {
+
+const PostPage = async ({ params }: Params) => {
   const { isEnabled } = draftMode();
   const { post, morePosts } = await getPostAndMorePosts(params.slug, isEnabled);
 

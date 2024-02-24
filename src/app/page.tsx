@@ -2,7 +2,8 @@ import Hero from "@/components/Hero/Hero";
 import { MoreArticles } from "@/components/MoreArticles";
 import { getAllPosts } from "@/lib/fetch/getPosts";
 import { draftMode } from "next/headers";
-export default async function Home() {
+
+const Home = async () => {
   const { isEnabled } = draftMode();
   const allPosts = await getAllPosts(isEnabled);
   const heroPost = allPosts[0];
@@ -24,4 +25,5 @@ export default async function Home() {
       <MoreArticles data={morePosts} />
     </main>
   );
-}
+};
+export default Home;
