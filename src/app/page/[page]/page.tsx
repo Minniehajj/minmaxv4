@@ -1,10 +1,8 @@
-import Hero from "@/components/Hero/Hero";
 import { MoreArticles } from "@/components/MoreArticles";
 import { getAllPostSlugs, getAllPosts } from "@/lib/fetch/getPosts";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { draftMode } from "next/headers";
 
-const PaginatedPage = async ({ params }: Params) => {
+const PaginatedPage = async ({ params }: { params: { page: number } }) => {
   const { isEnabled } = draftMode();
   const allPosts = await getAllPosts(isEnabled, params.page);
   const { totalPages } = await getAllPostSlugs(isEnabled);
