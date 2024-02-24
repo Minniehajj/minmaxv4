@@ -1,7 +1,7 @@
 "use client";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import Image, { ImageProps } from "next/image";
-import { FC, Suspense, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { CardToolTipProps } from ".";
 import { Card, Cards } from "scryfall-api";
 import clsx from "clsx";
@@ -53,25 +53,24 @@ export const CardToolTip: FC<CardToolTipProps> = ({
             <span>{name}</span>
           </button>
         </Tooltip.Trigger>
-        <Suspense>
-          <Tooltip.Content className="rounded-sm">
-            {data?.image_uris && (
-              <CardImage
-                src={data.image_uris.png}
-                alt={data.name}
-                onLoad={() => setIsLoading(false)}
-              />
-            )}
-            {data?.card_faces && (
-              <CardImage
-                src={data.card_faces[0]?.image_uris?.png || ""}
-                alt={data.name}
-                onLoad={() => setIsLoading(false)}
-              />
-            )}
-            <Tooltip.Arrow />
-          </Tooltip.Content>
-        </Suspense>
+
+        <Tooltip.Content className="rounded-sm">
+          {data?.image_uris && (
+            <CardImage
+              src={data.image_uris.png}
+              alt={data.name}
+              onLoad={() => setIsLoading(false)}
+            />
+          )}
+          {data?.card_faces && (
+            <CardImage
+              src={data.card_faces[0]?.image_uris?.png || ""}
+              alt={data.name}
+              onLoad={() => setIsLoading(false)}
+            />
+          )}
+          <Tooltip.Arrow />
+        </Tooltip.Content>
       </Tooltip.Root>
     </Tooltip.Provider>
   );

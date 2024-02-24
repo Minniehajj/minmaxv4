@@ -17,7 +17,6 @@ export const MarkdownParser = async ({
     return parseNode(mdNode) as any;
   });
 
-  console.log("data", data);
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (asset: any) => {

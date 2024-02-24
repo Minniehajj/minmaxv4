@@ -1,5 +1,4 @@
 const parseNode = (node: any) => {
-  console.log("incoming node", node);
   if (node.type === "html") {
     let nodeType = "html";
     if (node.value.includes("iframe")) {
