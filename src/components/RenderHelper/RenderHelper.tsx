@@ -40,7 +40,6 @@ export const RenderEntry = (entryMap: any): any => {
     data: { target: { sys: { id: number } } };
   }) => {
     const entry = entryMap.get(node.data.target.sys.id);
-    console.log("entry", entry);
     if (!entry) {
       return <></>;
     }
