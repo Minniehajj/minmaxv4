@@ -1,14 +1,13 @@
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, NodeData } from "@contentful/rich-text-types";
 import { RenderAsset, RenderBlock, RenderEntry } from "../RenderHelper";
 
-export const RichText = (post: any) => {
+export const RichText = (post: NodeData) => {
   // create an asset map
   const assetMap = new Map();
   const entryMap = new Map();
   const blockMap = new Map();
   // loop through the block linked entries and add them to the map
-
-  post?.links?.entries.block.map((entry: any) => {
+  post?.links?.entries?.block.map((entry: any) => {
     entryMap.set(entry?.sys?.id, entry);
   });
   // loop through the linked assets and add them to a map
@@ -25,6 +24,7 @@ export const RichText = (post: any) => {
       blockMap.set(block?.data?.target?.sys?.id, block);
     });
   }
+
   return {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: RenderAsset(assetMap),

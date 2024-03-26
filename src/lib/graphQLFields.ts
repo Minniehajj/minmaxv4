@@ -31,6 +31,33 @@ tagsCollection {
 }
 pageBody {
   json
+  links {
+    assets {
+      block {
+        __typename
+        sys {
+          id
+        }
+        title
+        url
+        description
+        contentType
+        width
+        height
+      }
+    }
+    entries {
+      block{
+        __typename
+        sys{
+          id
+        }
+        ...on Video{
+          url
+        }
+      }
+    }
+  }
 }
 body
 `;
@@ -64,6 +91,7 @@ tagsCollection(limit: 3) {
 }
 pageBody {
   json
+  links
 }
 body
 `;
