@@ -6,7 +6,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.ctfassets.net',
-       
       },
       {
         protocol: 'https',
@@ -15,7 +14,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cards.scryfall.io',
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.contentful.com',
+      },
     ],
 
   },

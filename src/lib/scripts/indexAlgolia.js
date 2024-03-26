@@ -27,9 +27,9 @@ const indexAlgolia = async () => {
       content_type: "post",
       limit: 1000,
     });
-    console.log(items.length, "posts found");
+    
     const posts = items.map(post => ({
-      url: `/blog/${post.fields.slug}/`,
+      url: `/article/${post.fields.slug}/`,
       // content: `${removeMd(post.fields.body)}`,
       // we want content to be only the first two paragraphs
       content: `${removeMd(post.fields.body).split("\n").slice(0, 2).join(" ")}`,
@@ -39,7 +39,7 @@ const indexAlgolia = async () => {
 
     const indexedContent = await algoliaIndex.saveObjects(posts);
 
-    console.log("Indexed Content:", indexedContent);
+    
   } catch (err) {
     console.error(err);
   }

@@ -1,8 +1,12 @@
 "use client";
 import algoliasearch from "algoliasearch/lite";
-import { SearchBox } from "react-instantsearch";
+
 import { InstantSearchNext } from "react-instantsearch-nextjs";
+import { useHits } from "react-instantsearch";
 import AlgoliaSVG from "@/public/algolia.svg";
+import { Hits } from "./Hits";
+import indexAlgolia from "@/lib/scripts/indexAlgolia";
+import { SearchBox } from "./SearchBox";
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID as string,
   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY as string,
@@ -11,7 +15,7 @@ const searchClient = algoliasearch(
 
 export const Search = () => {
   return (
-    <>
+    <div className="">
       <InstantSearchNext
         indexName="articles"
         searchClient={searchClient}
@@ -20,11 +24,13 @@ export const Search = () => {
           preserveSharedStateOnUnmount: true,
         }}
       >
-        <SearchBox className="text-theme-black" />
+        <SearchBox />
+        <div className="flex gap-2 items-center">
+          Powered by <AlgoliaSVG className="w-4 h-4" aria />
+          <span className="sr-only">Algolia</span>
+        </div>
+        <Hits />
       </InstantSearchNext>
-      <div className="flex gap-4">
-        Powered by <AlgoliaSVG className="w-4 h-4" />
-      </div>
-    </>
+    </div>
   );
 };
