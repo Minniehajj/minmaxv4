@@ -1,4 +1,4 @@
-import { PostProps } from "@/types";
+import { Author, PostProps } from "@/types";
 import getReadTime from "./getReadTime";
 
 export function extractPost(fetchResponse: {
@@ -23,10 +23,7 @@ export function extractPost(fetchResponse: {
 
 export function extractAuthors(fetchResponse: {
   authorCollection: {
-    items: {
-      image: { width: string; height: string; url: string };
-      title: string;
-    }[];
+    items: Author[];
   };
 }) {
   const post = fetchResponse.authorCollection.items;

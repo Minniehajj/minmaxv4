@@ -1,4 +1,11 @@
 export type Author = {
-  image: { url: string | undefined };
   title: string;
+  twitter: string;
+  slug: string;
+  image: {
+    url?: string;
+  };
+  authorType?: string;
+  bio?: string;
+  twitter?: string;
 };

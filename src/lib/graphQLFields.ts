@@ -137,3 +137,14 @@ export const POST_ENTRY_GRAPHQL_FIELDS = `
     }
   }    
 `;
+
+export const AUTHOR_GRAPHQL_FIELDS = `
+slug
+title
+twitter
+image {
+  url(transform: {format: WEBP, quality: 90})
+}
+authorType
+bio
+`;
