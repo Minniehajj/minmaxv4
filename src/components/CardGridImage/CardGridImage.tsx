@@ -15,12 +15,11 @@ export const CardGridImage: FC<CardGridImageProps> = ({
       onClick={() => setBackgroundImage(src)}
       onMouseEnter={() => setBackgroundImage(src)}
       onFocus={() => setBackgroundImage(src)}
-      className="shadow-theme-dark bg-theme-black transition duration-200 ease-in-out hover:ease-in
-      rounded-lg border bg-card text-card-foreground shadow-sm"
+      className="shadow-theme-black -z-[1] aspect-video w-full object-cover opacity-90 shadow-sm transition duration-100 ease-in-out group-hover:shadow-lg group-hover:ease-in dark:shadow-theme-blue"
     >
       <Image
         src={src}
-      alt={alt}
+        alt={alt}
         priority
         {...props}
         className={`${

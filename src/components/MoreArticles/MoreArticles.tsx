@@ -1,7 +1,7 @@
 "use client";
 import { PostProps } from "@/types";
 import * as Avatar from "@radix-ui/react-avatar";
-import { TimerIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, TimerIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Key } from "react";
 import { CardGridImage } from "../CardGridImage";
@@ -34,7 +34,7 @@ export const MoreArticles = ({
               <h2 className="mt-2 text-center text-2xl font-bold">
                 {post.title}
               </h2>
-              <div className="font-serif">
+              <div className="font-serif flex flex-col items-center">
                 {post.readTime ? (
                   <p className="flex items-center justify-center gap-2 text-center">
                     <TimerIcon />
@@ -49,6 +49,13 @@ export const MoreArticles = ({
                     authors={post.authorsCollection.items}
                   />
                 )}
+                <div className="mt-4"></div>
+                <div className="flex gap-2 items-center">
+                  Read More{" "}
+                  <span className="transform transition-all  group-hover:translate-x-1">
+                    <ArrowRightIcon />
+                  </span>
+                </div>
               </div>
             </Link>
           </article>

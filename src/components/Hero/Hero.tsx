@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { TimerIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, TimerIcon } from "@radix-ui/react-icons";
 import * as Avatar from "@radix-ui/react-avatar";
 import { HeroProps } from ".";
 import { AuthorsGroup } from "../AuthorsGroup";
@@ -19,7 +19,7 @@ const Hero: FC<HeroProps> = ({
   return (
     <Link
       href={`/article/${slug}`}
-      className="relative block w-full lg:mb-12 lg:-mt-8"
+      className="relative block w-full lg:mb-12 lg:-mt-8 group"
       onClick={() => {
         if (setBackgroundImage) {
           setBackgroundImage(image.src);
@@ -51,8 +51,15 @@ const Hero: FC<HeroProps> = ({
               className="flex items-center gap-4 text-sm"
             />
           </div>
+          <div className="flex gap-2 items-center">
+            Read More{" "}
+            <span className="transform transition-all  group-hover:translate-x-1">
+              <ArrowRightIcon />
+            </span>
+          </div>
         </div>
       </div>
+
       <div className="mb-12" />
     </Link>
   );
