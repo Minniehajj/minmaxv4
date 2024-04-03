@@ -4,8 +4,40 @@ import { RichText } from "@/components/RichText";
 import { getPostAndMorePosts } from "@/lib/fetch/getPostAndMorePosts";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { TimerIcon } from "@radix-ui/react-icons";
+import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import Image from "next/image";
+
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // fetch data
+  const { post } = await getPostAndMorePosts(params.slug, false);
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: post.title,
+    openGraph: {
+      images: [...previousImages, post.heroImage.url],
+    },
+    authors: [
+      ...post.authorsCollection.items.map((author) => {
+        return {
+          name: author.title,
+          twitter: author.twitter,
+        };
+      }),
+    ],
+    description: post.metaDescription,
+  };
+}
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
   const { isEnabled } = draftMode();

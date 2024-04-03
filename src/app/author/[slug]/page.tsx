@@ -10,6 +10,7 @@ const AuthorPosts = async ({ params }: { params: { slug: string } }) => {
   const { isEnabled } = draftMode();
   const posts = await getAllPostsByAuthor(params.slug, 1, isEnabled);
   const { totalPages } = await getAllPostSlugsByAuthor(params.slug, isEnabled);
+  
   return (
     <main className="pt-2 pb-12">
       <MoreArticles
