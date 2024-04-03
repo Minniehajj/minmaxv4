@@ -9,7 +9,7 @@ import Image from "next/image";
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
   const { isEnabled } = draftMode();
-  const { post, morePosts } = await getPostAndMorePosts(params.slug, isEnabled);
+  const { post } = await getPostAndMorePosts(params.slug, isEnabled);
 
   return (
     <main className="pt-2 pb-12">

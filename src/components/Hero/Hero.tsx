@@ -18,7 +18,7 @@ const Hero: FC<HeroProps> = ({
 }) => {
   return (
     <Link
-      href={slug}
+      href={`/article/${slug}`}
       className="relative block w-full lg:mb-12 lg:-mt-8"
       onClick={() => {
         if (setBackgroundImage) {
