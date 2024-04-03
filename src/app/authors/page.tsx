@@ -2,7 +2,13 @@ import { PrimaryAuthors } from "@/components/PrimaryAuthors";
 import { SecondaryAuthors } from "@/components/SecondaryAuthors";
 import { getAuthors } from "@/lib/fetch/getAuthors";
 import { Author } from "@/types";
+import { Metadata } from "next";
 import { draftMode } from "next/headers";
+
+export const metadata: Metadata = {
+  title: "",
+  description: "...",
+};
 
 const AuthorsPage = async () => {
   const { isEnabled } = draftMode();

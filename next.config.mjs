@@ -21,16 +21,6 @@ const nextConfig = {
       },
     ],
   },
-  redirects: async () => {
-    // need to redirect anything that used to match minmaxblog.com/[slug] to minmaxblog.com/article/[slug]
-    return [
-      {
-        source: "/:slug",
-        destination: "/article/:slug",
-        permanent: true,
-      },
-    ];
-  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
