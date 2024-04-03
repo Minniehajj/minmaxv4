@@ -13,11 +13,13 @@ export const MoreArticles = ({
   setBackgroundImage,
   currentPage,
   totalPages,
+  authorSlug,
 }: {
   data: PostProps[];
   setBackgroundImage?: (image: string) => void;
   currentPage: number;
   totalPages: number;
+  authorSlug?: string;
 }) => {
   return (
     <>
@@ -41,16 +43,22 @@ export const MoreArticles = ({
                 ) : null}
 
                 <div className="mt-4"></div>
-                <AuthorsGroup
-                  className="flex items-center justify-center gap-4 text-sm"
-                  authors={post.authorsCollection.items}
-                />
+                {post?.authorsCollection?.items && (
+                  <AuthorsGroup
+                    className="flex items-center justify-center gap-4 text-sm"
+                    authors={post.authorsCollection.items}
+                  />
+                )}
               </div>
             </Link>
           </article>
         ))}
       </div>
-      <Pagination pages={totalPages} currentPage={currentPage} />
+      <Pagination
+        pages={totalPages}
+        currentPage={currentPage}
+        authorSlug={authorSlug}
+      />
     </>
   );
 };

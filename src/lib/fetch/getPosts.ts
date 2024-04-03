@@ -1,6 +1,6 @@
 import { PostProps } from "@/types";
-import { extractPostEntries } from "../extract";
-import { POST_GRAPHQL_FIELDS } from "../graphQLFields";
+import { extractPostEntries, extractPostEntriesFromAuthors } from "../extract";
+import { POST_GRAPHQL_FIELDS, SIMPLE_GRAPHQL_FIELDS } from "../graphQLFields";
 import { fetchGraphQL } from "./fetchGraphQL";
 
 export async function getAllPostSlugs(isDraftMode: boolean): Promise<{
@@ -58,4 +58,87 @@ export async function getAllPosts(
     isDraftMode
   );
   return extractPostEntries(entries.data);
+}
+
+export async function getAllPostsByAuthor(
+  authorSlug: string,
+  page: number,
+  isDraftMode: boolean
+): Promise<PostProps[]> {
+  const queryLimit = 6;
+  const skipMultiplier = page === 1 ? 0 : page - 1;
+  const skip = skipMultiplier > 0 ? queryLimit * skipMultiplier : 0;
+  const entries = await fetchGraphQL(
+    `query {
+      authorCollection(limit: 1, where: { slug: "${authorSlug}" }, preview: ${
+      isDraftMode ? "true" : "false"
+    }) {
+        items {
+          linkedFrom {
+            postCollection(limit: 6, skip: ${
+              page === 1 ? skip : skip + 1
+            }, preview: ${isDraftMode ? "true" : "false"}) {
+              items{
+                heroImage{
+                  url
+                  height
+                  width
+                }
+                slug
+                title
+              }
+            }
+          }
+        }
+      }
+    }`,
+    isDraftMode
+  );
+
+  return extractPostEntriesFromAuthors(entries.data);
+}
+
+export async function getAllPostSlugsByAuthor(
+  authorSlug: string,
+  isDraftMode: boolean
+): Promise<{
+  totalPosts: number;
+  totalPages: number;
+  paths: { params: { slug: string } }[];
+}> {
+  const entries = await fetchGraphQL(
+    `query {
+      authorCollection(limit: 1, where: { slug: "${authorSlug}" }, preview: ${
+      isDraftMode ? "true" : "false"
+    }) {
+        items {
+          linkedFrom {
+            postCollection(preview: ${isDraftMode ? "true" : "false"}) {
+              items{
+                slug
+              }
+            }
+          }
+        }
+      }
+    }`,
+    isDraftMode
+  );
+  const totalPosts =
+    entries?.data?.authorCollection?.items?.[0].linkedFrom.postCollection.items
+      .length;
+  const totalPages = Math.ceil(totalPosts / 6);
+  const paths = [];
+  /**
+   * Start from page 2, so we don't replicate /blog
+   * which is page 1
+   */
+  for (let page = 2; page <= totalPages; page++) {
+    paths.push({ params: { slug: page.toString() } });
+  }
+  return {
+    totalPosts,
+    totalPages,
+    paths,
+  };
 }

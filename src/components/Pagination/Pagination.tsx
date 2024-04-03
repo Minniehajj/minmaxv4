@@ -5,22 +5,25 @@ import { PaginationProps } from ".";
 import {
   Pagination as PaginationComponent,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-export const Pagination = ({ pages, currentPage }: PaginationProps) => {
+export const Pagination = ({
+  pages,
+  currentPage,
+  authorSlug,
+}: PaginationProps) => {
   const nextPage = currentPage * 1 + 1;
   const prevPage = currentPage * 1 - 1;
+  const pageURL = authorSlug ? `/author/${authorSlug}/` : `/page/`;
   return (
     <PaginationComponent>
       <PaginationContent>
         <PaginationItem>
           {currentPage > 1 && (
             <PaginationPrevious
-              href={currentPage * 1 === 2 ? `/` : `/page/${prevPage}`}
+              href={currentPage * 1 === 2 ? `/` : `${pageURL + prevPage}`}
             >
               <ChevronLeftIcon />
               Previous
@@ -28,7 +31,7 @@ export const Pagination = ({ pages, currentPage }: PaginationProps) => {
           )}
         </PaginationItem>
         {currentPage < pages && (
-          <PaginationNext href={`/page/${nextPage}`}>
+          <PaginationNext href={`${pageURL + nextPage}`}>
             Next
             <ChevronRightIcon />
           </PaginationNext>

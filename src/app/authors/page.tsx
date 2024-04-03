@@ -1,17 +1,10 @@
-import { AuthorsGroup } from "@/components/AuthorsGroup";
-import { MarkdownParser } from "@/components/MarkdownParser";
 import { PrimaryAuthors } from "@/components/PrimaryAuthors";
-import { RichText } from "@/components/RichText";
 import { SecondaryAuthors } from "@/components/SecondaryAuthors";
 import { getAuthors } from "@/lib/fetch/getAuthors";
-import { getPostAndMorePosts } from "@/lib/fetch/getPostAndMorePosts";
 import { Author } from "@/types";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { TimerIcon } from "@radix-ui/react-icons";
 import { draftMode } from "next/headers";
-import Image from "next/image";
 
-const AuthorsPage = async ({ params }: { params: { slug: string } }) => {
+const AuthorsPage = async () => {
   const { isEnabled } = draftMode();
   const { authors } = await getAuthors(isEnabled);
   const primaryAuthors: Author[] = [];
@@ -25,6 +18,12 @@ const AuthorsPage = async ({ params }: { params: { slug: string } }) => {
   });
   return (
     <main className="pt-2 pb-12">
+      <div className="prose">
+        <h1 className="text-theme-black dark:text-theme-white">
+          Meet the Authors
+        </h1>
+      </div>
+      <div className="h-12" />
       {primaryAuthors.length > 0 && <PrimaryAuthors authors={primaryAuthors} />}
       <div className="h-12" />
       {secondaryAuthors.length > 0 && (

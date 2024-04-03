@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 
 const PrimaryAuthors = ({ authors }: { authors: Author[] }) => {
   return (
@@ -37,6 +38,14 @@ const PrimaryAuthors = ({ authors }: { authors: Author[] }) => {
             {author.bio && (
               <CardContent>
                 <p className="font-serif">{author.bio}</p>
+                <Link
+                  className="text-theme-black dark:text-theme-white"
+                  href={`/author/${author.slug}`}
+                >
+                  <p className="text-theme-primary">
+                    Read more by {author.title}
+                  </p>
+                </Link>
               </CardContent>
             )}
           </Card>
