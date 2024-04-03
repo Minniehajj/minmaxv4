@@ -21,7 +21,7 @@ export async function getAllPostSlugs(isDraftMode: boolean): Promise<{
     isDraftMode
   );
   const totalPosts = entries?.data?.postCollection?.items?.length;
-  const totalPages = Math.ceil(totalPosts / 9);
+  const totalPages = Math.ceil(totalPosts / 6);
   const paths = [];
   /**
    * Start from page 2, so we don't replicate /blog
@@ -40,7 +40,7 @@ export async function getAllPosts(
   isDraftMode: boolean,
   page: number = 1
 ): Promise<PostProps[]> {
-  const queryLimit = page === 1 ? 10 : 9;
+  const queryLimit = page === 1 ? 7 : 6;
   const skipMultiplier = page === 1 ? 0 : page - 1;
   const skip = skipMultiplier > 0 ? queryLimit * skipMultiplier : 0;
   const entries = await fetchGraphQL(
