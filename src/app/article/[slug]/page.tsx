@@ -17,7 +17,9 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   // fetch data
-  const { post } = await getPostAndMorePosts(params.slug, false);
+  const { isEnabled } = draftMode();
+
+  const { post } = await getPostAndMorePosts(params.slug, isEnabled);
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || [];

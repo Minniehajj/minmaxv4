@@ -73,4 +73,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  iframe {
+    @apply w-full h-full
+  }
 }
