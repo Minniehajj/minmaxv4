@@ -24,6 +24,7 @@ const nextConfig = {
   headers: async () => {
     return [
       {
+        source: '/(.*)',
         headers: [
           {
             key: 'Content-Security-Policy',
