@@ -1,5 +1,6 @@
 import { BLOCKS, NodeData } from "@contentful/rich-text-types";
 import { RenderAsset, RenderBlock, RenderEntry } from "../RenderHelper";
+import { ArticleBody, ArticleBodyFromJSON } from "../ArticleBody";
 
 export const RichText = (post: NodeData) => {
   // create an asset map
@@ -31,9 +32,21 @@ export const RichText = (post: NodeData) => {
       [BLOCKS.EMBEDDED_ENTRY]: RenderEntry(entryMap),
       [BLOCKS.PARAGRAPH]: RenderBlock(),
       ["linkReference"]: RenderBlock(),
-      [BLOCKS.HEADING_1]: (node: any, children: any) => <h1>{children}</h1>,
-      [BLOCKS.HEADING_2]: (node: any, children: any) => <h2>{children}</h2>,
-      [BLOCKS.HEADING_3]: (node: any, children: any) => <h3>{children}</h3>,
+      [BLOCKS.HEADING_1]: (node: any, children: any) => (
+        <h1>
+          <ArticleBodyFromJSON>{children}</ArticleBodyFromJSON>
+        </h1>
+      ),
+      [BLOCKS.HEADING_2]: (node: any, children: any) => (
+        <h2>
+          <ArticleBodyFromJSON>{children}</ArticleBodyFromJSON>
+        </h2>
+      ),
+      [BLOCKS.HEADING_3]: (node: any, children: any) => (
+        <h3>
+          <ArticleBodyFromJSON>{children}</ArticleBodyFromJSON>
+        </h3>
+      ),
       [BLOCKS.HEADING_4]: (node: any, children: any) => <h4>{children}</h4>,
       [BLOCKS.HEADING_5]: (node: any, children: any) => <h5>{children}</h5>,
       [BLOCKS.HEADING_6]: (node: any, children: any) => <h6>{children}</h6>,

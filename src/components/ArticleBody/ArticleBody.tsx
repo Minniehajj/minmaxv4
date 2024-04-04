@@ -4,6 +4,7 @@ import reactStringReplace from "react-string-replace";
 import Link from "next/link";
 import { ArticleBodyProps } from ".";
 import { CardToolTip } from "../CardToolTip";
+import { FC, PropsWithChildren } from "react";
 export const ArticleBody = ({ ...props }: ArticleBodyProps) => {
   let parsedBody;
   const p = /\[([\s\w\d-+_/,'’&À-ÿ]*)\]/g;
@@ -23,5 +24,22 @@ export const ArticleBody = ({ ...props }: ArticleBodyProps) => {
     );
   }
 
+  return <>{parsedBody}</>;
+};
+
+export const ArticleBodyFromJSON: FC<PropsWithChildren> = ({ children }) => {
+  const stringifiedChildren = JSON.stringify(children);
+  console.log("stringifiedChildren", stringifiedChildren);
+  let parsedBody;
+  const p = /\[([\s\w\d-+_/,'’&À-ÿ]*)\]/g;
+  const body = stringifiedChildren
+    .replace(/[\u2018\u2019]/g, "'")
+    // this will be enclosed with [" and "] and we need to remove them, and the square brackets
+    .slice(2, -2)
+    .replace(/\\n/g, "");
+
+  parsedBody = reactStringReplace(body, p, (match, i) => (
+    <CardToolTip key={`index-${i}`} name={match} />
+  ));
   return <>{parsedBody}</>;
 };
