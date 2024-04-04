@@ -26,12 +26,15 @@ export default function RootLayout({
 }>) {
   const theme = cookies().get("theme");
   return (
-    <html lang="en" className={theme?.value}>
+    <html
+      className={`${GeistSans.variable} ${GeistMono.variable} ${theme?.value}`}
+      lang="en"
+    >
       <body
         className={clsx(
           "w-full bg-theme-white bg-cover bg-center bg-no-repeat bg-blend-screen dark:bg-theme-black dark:bg-blend-multiply text-theme-black dark:text-theme-white transition-colors duration-500 m-auto max-w-screen-2xl px-4 antialiased font-sans",
-          GeistSans.variable,
-          GeistMono.variable
+          GeistSans.className,
+          GeistMono.className
         )}
       >
         <Nav />

@@ -47,7 +47,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <main className="pt-2 pb-12">
-      <div className="prose m-auto mb-8 text-center dark:prose-invert lg:prose-2xl">
+      <div className="prose m-auto mb-8 text-center dark:prose-invert lg:prose-2xl ">
         <h1>{post.title}</h1>
         <Image
           {...post.heroImage}

@@ -88,7 +88,7 @@ export const MarkdownParser = async ({
     },
   };
   return (
-    <article className="font-serif prose m-auto dark:prose-invert lg:prose-xl">
+    <article className=" prose m-auto dark:prose-invert lg:prose-xl">
       {data && documentToReactComponents(data, options)}
     </article>
   );

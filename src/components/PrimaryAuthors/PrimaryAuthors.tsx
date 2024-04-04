@@ -37,7 +37,7 @@ const PrimaryAuthors = ({ authors }: { authors: Author[] }) => {
           </CardHeader>
           {author.bio && (
             <CardContent className="flex flex-col items-center">
-              <p className="font-serif">{author.bio}</p>
+              <p className="">{author.bio}</p>
               {author.twitter && (
                 <Link
                   className="text-theme-black dark:text-theme-white"

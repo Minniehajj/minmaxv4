@@ -34,7 +34,7 @@ export const MoreArticles = ({
               <h2 className="mt-2 text-center text-2xl font-bold">
                 {post.title}
               </h2>
-              <div className="font-serif flex flex-col items-center">
+              <div className=" flex flex-col items-center">
                 {post.readTime ? (
                   <p className="flex items-center justify-center gap-2 text-center">
                     <TimerIcon />

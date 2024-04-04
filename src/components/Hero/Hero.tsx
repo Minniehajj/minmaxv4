@@ -39,7 +39,7 @@ const Hero: FC<HeroProps> = ({
       />
       <div className="prose top-1/2 right-20 mt-8 -translate-y-7 rounded border bg-opacity-80 p-2 dark:prose-invert lg:absolute lg:mt-0 lg:bg-theme-white lg:p-8 lg:dark:bg-theme-black">
         <h1>{title}</h1>
-        <div className="font-serif">
+        <div className="">
           <p>{description}</p>
           <p className="flex items-center gap-2 text-sm">
             <TimerIcon />
