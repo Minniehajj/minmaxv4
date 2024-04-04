@@ -25,8 +25,10 @@ export const Search = () => {
         }}
       >
         <SearchBox />
+        <div className="h-4"></div>
         <div className="flex gap-2 items-center">
-          Powered by <AlgoliaSVG className="w-4 h-4" aria />
+          Powered by <AlgoliaSVG className="w-4 h-4" />
+          Algolia
           <span className="sr-only">Algolia</span>
         </div>
         <Hits />
