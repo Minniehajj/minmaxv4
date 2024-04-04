@@ -29,7 +29,6 @@ export const ArticleBody = ({ ...props }: ArticleBodyProps) => {
 
 export const ArticleBodyFromJSON: FC<PropsWithChildren> = ({ children }) => {
   const stringifiedChildren = JSON.stringify(children);
-  console.log("stringifiedChildren", stringifiedChildren);
   let parsedBody;
   const p = /\[([\s\w\d-+_/,'’&À-ÿ]*)\]/g;
   const body = stringifiedChildren
