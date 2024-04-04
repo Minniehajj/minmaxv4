@@ -29,6 +29,14 @@ const nextConfig = {
           {
             key: 'Content-Security-Policy',
             value: "frame-ancestors 'self' https://app.contentful.com",                        
+          },
+          {
+            key: 'X-Frame-Options',
+            value:'SAMEORIGIN',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'no-store, must-revalidate',
           }
         ]
       }
