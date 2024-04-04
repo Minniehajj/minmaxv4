@@ -21,6 +21,18 @@ const nextConfig = {
       },
     ],
   },
+  headers: async () => {
+    return [
+      {
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' https://app.contentful.com",                        
+          }
+        ]
+      }
+    ]
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
