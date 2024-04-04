@@ -29,7 +29,7 @@ export const MoreArticles = ({
             <Link href={`/article/${post.slug}`} className="group">
               <CardGridImage
                 {...post.heroImage}
-                // setBackgroundImage={props.setBackgroundImage}
+                setBackgroundImage={setBackgroundImage}
               />
               <h2 className="mt-2 text-center text-2xl font-bold">
                 {post.title}

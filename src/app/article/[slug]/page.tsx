@@ -50,7 +50,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
         <Image
           {...post.heroImage}
           priority
-          alt={post.heroImage.alt}
+          alt={post.heroImage.alt || post.title}
           className="shadow-theme-dark -z-[1] aspect-video w-full object-cover opacity-90 shadow-sm dark:shadow-theme-blue"
         />
       </div>
@@ -77,6 +77,12 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
           )}
         </div>
       )}
+      <div
+        className="fixed top-0 left-0 -z-10 h-full min-h-[1080px] w-full bg-theme-white bg-cover bg-center bg-no-repeat bg-blend-screen dark:bg-theme-black dark:bg-blend-multiply"
+        style={
+          post.heroImage && { backgroundImage: `url(${post.heroImage.url})` }
+        }
+      />
     </main>
   );
 };

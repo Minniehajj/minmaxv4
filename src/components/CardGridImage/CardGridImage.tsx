@@ -19,7 +19,7 @@ export const CardGridImage: FC<CardGridImageProps> = ({
     >
       <Image
         src={src}
-        alt={alt}
+        alt={alt || "Image"}
         priority
         {...props}
         className={`${

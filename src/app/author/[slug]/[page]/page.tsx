@@ -1,4 +1,4 @@
-import { MoreArticles } from "@/components/MoreArticles";
+import { PaginatedClient } from "@/components/PaginatedClient";
 import {
   getAllPostsByAuthor,
   getAllPostSlugsByAuthor,
@@ -16,12 +16,7 @@ const AuthorPostsPaginated = async ({
   const { totalPages } = await getAllPostSlugsByAuthor(params.slug, isEnabled);
   return (
     <main className="pt-2 pb-12">
-      <MoreArticles
-        data={posts}
-        currentPage={params.page}
-        totalPages={totalPages}
-        authorSlug={params.slug}
-      />
+      <PaginatedClient posts={posts} totalPages={totalPages} params={params} />
     </main>
   );
 };

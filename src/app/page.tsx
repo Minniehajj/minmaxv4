@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero/Hero";
-import { MoreArticles } from "@/components/MoreArticles";
+import { HomeClient } from "@/components/HomeClient";
 import { getAllPostSlugs, getAllPosts } from "@/lib/fetch/getPosts";
-import getStuff from "@/lib/scripts/indexAlgolia";
 import { draftMode } from "next/headers";
 
 const Home = async () => {
@@ -13,19 +12,11 @@ const Home = async () => {
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col pt-2 pb-12">
-      <Hero
-        title={heroPost.title}
-        slug={heroPost.slug}
-        // setBackgroundImage={heroPost.setBackgroundImage}
-        image={{
-          ...heroPost.heroImage,
-        }}
-        description={heroPost.metaDescription}
-        readTime={heroPost.readTime}
-        authors={heroPost.authorsCollection.items}
+      <HomeClient
+        heroPost={heroPost}
+        morePosts={morePosts}
+        totalPages={totalPages}
       />
-
-      <MoreArticles data={morePosts} totalPages={totalPages} currentPage={1} />
     </main>
   );
 };
