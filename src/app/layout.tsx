@@ -3,7 +3,7 @@ import "./globals.css";
 import { cookies } from "next/headers";
 import { Nav } from "@/components/Nav";
 import clsx from "clsx";
-
+import { Analytics } from "@vercel/analytics/react";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
