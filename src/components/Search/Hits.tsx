@@ -7,7 +7,7 @@ import { useSearchBox } from "react-instantsearch";
 import reactStringReplace from "react-string-replace";
 
 const filterText = (text: string) => {
-  const parsedtext = text.replace(/[\u2018\u2019]/g, "'");
+  const parsedtext = text?.replace(/[\u2018\u2019]/g, "'");
   const p = /\[([\s\w\d-+_/,'’&À-ÿ]*)\]/g;
 
   const parsedBody = reactStringReplace(parsedtext, p, (match, i) => (
