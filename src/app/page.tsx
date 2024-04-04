@@ -18,7 +18,6 @@ export async function generateMetadata(
     openGraph: {
       images: [...previousImages, firstImage],
     },
-
     description:
       "Check out the latest in hard hitting articles about Magic: The Gathering!",
   };
