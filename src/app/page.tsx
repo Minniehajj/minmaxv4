@@ -1,14 +1,28 @@
 import { HomeClient } from "@/components/HomeClient";
 import { getAllPostSlugs, getAllPosts } from "@/lib/fetch/getPosts";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 
-export const metadata: Metadata = {
-  title: "Welcome to MinMaxBlog.com",
-  description:
-    "Check out the latest in hard hitting articles about Magic: The Gathering!",
-  
-};
+export async function generateMetadata(
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // fetch data
+  const allPosts = await getAllPosts(false);
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+  const firstImage = allPosts[0].heroImage.url;
+
+  return {
+    title: "Welcome to MinMaxBlog.com",
+    openGraph: {
+      images: [...previousImages, firstImage],
+    },
+
+    description:
+      "Check out the latest in hard hitting articles about Magic: The Gathering!",
+  };
+}
 
 const Home = async () => {
   const { isEnabled } = draftMode();
