@@ -5,7 +5,7 @@ import { InstantSearchNext } from "react-instantsearch-nextjs";
 import { useHits } from "react-instantsearch";
 import AlgoliaSVG from "@/public/algolia.svg";
 import { Hits } from "./Hits";
-import indexAlgolia from "@/lib/scripts/indexAlgolia";
+
 import { SearchBox } from "./SearchBox";
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID as string,

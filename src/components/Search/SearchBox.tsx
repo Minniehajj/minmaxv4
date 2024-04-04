@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 export const SearchBox = () => {
-  const { query, refine, clear, ...rest } = useSearchBox();
+  const { query, refine, clear } = useSearchBox();
   const [inputValue, setInputValue] = useState(query);
   const inputRef = useRef<HTMLInputElement>(null);
   const setQuery = (value: string) => {

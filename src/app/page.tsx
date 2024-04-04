@@ -1,7 +1,14 @@
-import Hero from "@/components/Hero/Hero";
 import { HomeClient } from "@/components/HomeClient";
 import { getAllPostSlugs, getAllPosts } from "@/lib/fetch/getPosts";
+import { Metadata } from "next";
 import { draftMode } from "next/headers";
+
+export const metadata: Metadata = {
+  title: "Welcome to MinMaxBlog.com",
+  description:
+    "Check out the latest in hard hitting articles about Magic: The Gathering!",
+  
+};
 
 const Home = async () => {
   const { isEnabled } = draftMode();
