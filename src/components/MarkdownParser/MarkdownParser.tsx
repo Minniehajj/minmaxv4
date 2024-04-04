@@ -52,6 +52,39 @@ export const MarkdownParser = async ({
         );
         return <p>{block}</p>;
       },
+      [BLOCKS.HEADING_1]: (node: any) => {
+        const block = node.content.map(
+          (
+            child: JSX.IntrinsicAttributes & ArticleBodyProps,
+            index: Key | null | undefined
+          ) => {
+            return <ArticleBody {...child} key={index} />;
+          }
+        );
+        return <h1>{block}</h1>;
+      },
+      [BLOCKS.HEADING_2]: (node: any) => {
+        const block = node.content.map(
+          (
+            child: JSX.IntrinsicAttributes & ArticleBodyProps,
+            index: Key | null | undefined
+          ) => {
+            return <ArticleBody {...child} key={index} />;
+          }
+        );
+        return <h2>{block}</h2>;
+      },
+      [BLOCKS.HEADING_3]: (node: any) => {
+        const block = node.content.map(
+          (
+            child: JSX.IntrinsicAttributes & ArticleBodyProps,
+            index: Key | null | undefined
+          ) => {
+            return <ArticleBody {...child} key={index} />;
+          }
+        );
+        return <h3>{block}</h3>;
+      },
     },
   };
   return (
