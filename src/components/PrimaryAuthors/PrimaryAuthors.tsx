@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import { TwitterLogoIcon } from "@radix-ui/react-icons";
 
 const PrimaryAuthors = ({ authors }: { authors: Author[] }) => {
   return (
@@ -35,8 +36,19 @@ const PrimaryAuthors = ({ authors }: { authors: Author[] }) => {
             )}
           </CardHeader>
           {author.bio && (
-            <CardContent>
+            <CardContent className="flex flex-col items-center">
               <p className="font-serif">{author.bio}</p>
+              {author.twitter && (
+                <Link
+                  className="text-theme-black dark:text-theme-white"
+                  href={"https://twitter.com/" + `${author.twitter}`}
+                  target="_blank"
+                >
+                  <p className="text-theme-primary flex items-center gap-2">
+                    <TwitterLogoIcon className="" />@{author.twitter}
+                  </p>
+                </Link>
+              )}
               <Link
                 className="text-theme-black dark:text-theme-white"
                 href={`/author/${author.slug}`}
