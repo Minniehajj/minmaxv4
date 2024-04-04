@@ -3,20 +3,18 @@ import { getAllPostSlugs, getAllPosts } from "@/lib/fetch/getPosts";
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 
-export async function generateMetadata(
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   // fetch data
   const allPosts = await getAllPosts(false);
 
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || [];
+
   const firstImage = allPosts[0].heroImage.url;
 
   return {
     title: "Welcome to MinMaxBlog.com",
     openGraph: {
-      images: [...previousImages, firstImage],
+      images: [firstImage],
     },
     description:
       "Check out the latest in hard hitting articles about Magic: The Gathering!",
