@@ -2,8 +2,9 @@ import { AuthorsGroup } from "@/components/AuthorsGroup";
 import { MarkdownParser } from "@/components/MarkdownParser";
 import { RichText } from "@/components/RichText";
 import { getPostAndMorePosts } from "@/lib/fetch/getPostAndMorePosts";
+import { formatDateTime } from "@/lib/utils";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { TimerIcon } from "@radix-ui/react-icons";
+import { CalendarIcon, TimerIcon } from "@radix-ui/react-icons";
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import Image from "next/image";
@@ -47,8 +48,26 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <main className="pt-2 pb-12">
-      <div className="prose m-auto mb-8 text-center dark:prose-invert lg:prose-2xl ">
-        <h1>{post.title}</h1>
+      <div className="prose m-auto mb-8 text-center dark:prose-invert lg:prose-2xl flex flex-col items-center">
+        <h1 className="!my-0">{post.title}</h1>
+        <div className="flex gap-4">
+          <p className="flex items-center gap-2 text-base !my-0">
+            <CalendarIcon />
+            {formatDateTime(post.publishDate)}
+          </p>
+          <p className="flex items-center gap-2 text-base">
+            <TimerIcon />
+            {post.readTime} minute read
+          </p>
+        </div>
+        <div>
+          <div className="flex gap-8">
+            <AuthorsGroup
+              authors={post.authorsCollection.items}
+              className="flex items-center gap-4 text-sm !my-0"
+            />
+          </div>
+        </div>
         <Image
           {...post.heroImage}
           priority
@@ -58,16 +77,6 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
       </div>
       {(post?.pageBody || post.body) && (
         <div className="prose m-auto dark:prose-invert lg:prose-xl">
-          <p className="flex items-center gap-2 text-sm">
-            <TimerIcon />
-            {post.readTime} minute read
-          </p>
-          <div className="flex gap-8">
-            <AuthorsGroup
-              authors={post.authorsCollection.items}
-              className="flex items-center gap-4 text-sm"
-            />
-          </div>
           <div className="mb-12" />
           {post.body && !post?.pageBody?.json ? (
             <MarkdownParser>{post.body}</MarkdownParser>

@@ -22,7 +22,7 @@ const PaginatedClient = ({
       <MoreArticles
         data={posts}
         authorSlug={params.slug || authorSlug}
-        currentPage={1}
+        currentPage={params.page || 1}
         totalPages={totalPages}
         setBackgroundImage={setBackgroundImage}
       />

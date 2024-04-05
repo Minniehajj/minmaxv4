@@ -15,4 +15,5 @@ export type HeroProps = {
       url: string;
     };
   }[];
+  publishDate: string;
 };

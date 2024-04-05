@@ -2,10 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { ArrowRightIcon, TimerIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, CalendarIcon, TimerIcon } from "@radix-ui/react-icons";
 import * as Avatar from "@radix-ui/react-avatar";
 import { HeroProps } from ".";
 import { AuthorsGroup } from "../AuthorsGroup";
+import { formatDateTime } from "@/lib/utils";
 
 const Hero: FC<HeroProps> = ({
   title,
@@ -15,6 +16,7 @@ const Hero: FC<HeroProps> = ({
   setBackgroundImage,
   readTime,
   authors,
+  publishDate,
 }) => {
   return (
     <Link
@@ -42,21 +44,25 @@ const Hero: FC<HeroProps> = ({
         <div className="">
           <p>{description}</p>
           <p className="flex items-center gap-2 text-sm">
+            <CalendarIcon />
+            {formatDateTime(publishDate)}
+          </p>
+          <p className="flex items-center gap-2 text-sm">
             <TimerIcon />
             {readTime} minute read
           </p>
           <div className="flex gap-8">
             <AuthorsGroup
               authors={authors}
-              className="flex items-center gap-4 text-sm"
+              className="flex items-center gap-4 text-sm !my-0"
             />
           </div>
-          <div className="flex gap-2 items-center">
+          <p className="flex gap-2 items-center text-sm">
             Read More{" "}
             <span className="transform transition-all  group-hover:translate-x-1">
               <ArrowRightIcon />
             </span>
-          </div>
+          </p>
         </div>
       </div>
 

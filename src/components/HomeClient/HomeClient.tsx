@@ -27,6 +27,7 @@ const HomeClient = ({
         description={heroPost.metaDescription}
         readTime={heroPost.readTime}
         authors={heroPost.authorsCollection.items}
+        publishDate={heroPost.publishDate}
       />
       <MoreArticles
         data={morePosts}
