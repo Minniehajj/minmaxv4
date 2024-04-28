@@ -23,7 +23,8 @@ export async function getAllPostSlugs(isDraftMode: boolean): Promise<{
   );
   const totalPosts = entries?.data?.postCollection?.items?.length;
   const totalPages = Math.ceil(totalPosts / 6);
-  const { slugs } = entries?.data?.postCollection?.items || [];
+  const slugs = entries?.data?.postCollection?.items || [];
+  console.log(slugs);
   const paths = [];
   /**
    * Start from page 2, so we don't replicate /blog

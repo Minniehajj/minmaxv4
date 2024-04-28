@@ -2,9 +2,10 @@ import { getAuthors } from "@/lib/fetch/getAuthors";
 import { getAllPostSlugs } from "@/lib/fetch/getPosts";
 import { MetadataRoute } from "next";
 
-const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
+export default async function sitemap() {
   const { slugs } = await getAllPostSlugs(false);
   const { authors } = await getAuthors(false);
+
   const articleUrls = slugs.map((slug) => ({
     url: `https://minmaxblog.com/article/${slug.slug}`,
     lastModified: new Date(),
@@ -28,6 +29,4 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     ...articleUrls,
     ...authorUrls,
   ];
-};
-
-export default sitemap;
+}
