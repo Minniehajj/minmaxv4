@@ -90,6 +90,7 @@ export async function getAllPostsByAuthor(
                 }
                 slug
                 title
+                publishDate
               }
             }
           }
