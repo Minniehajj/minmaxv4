@@ -2,26 +2,24 @@
 import BlackManaSymbol from "@/public/black_mana_symbol.svg";
 import WhiteManaSymbol from "@/public/white_mana_symbol.svg";
 
-import { FC, useState } from "react";
-import { Theme, ThemeToggleButtonProps } from ".";
+import { FC, useEffect, useState } from "react";
+import { Theme } from ".";
 import { ToggleSwitch } from "../ToggleSwitch";
 
-const ThemeToggleButton: FC<ThemeToggleButtonProps> = ({ theme }) => {
-  const [_theme, setTheme] = useState<Theme>(theme);
+const ThemeToggleButton = () => {
+  const [theme, setTheme] = useState(global.window?.__theme || "light");
+
   const toggleTheme = () => {
-    const root = document.getElementsByTagName("html")[0];
-    root.classList.toggle(Theme.dark);
-    if (root.classList.contains(Theme.dark)) {
-      setTheme(Theme.dark);
-      document.cookie = `theme=${Theme.dark}`;
-    } else {
-      setTheme(Theme.light);
-      document.cookie = `theme=${Theme.light}`;
-    }
+    global.window?.__setPreferredTheme(theme === "light" ? "dark" : "light");
   };
+
+  useEffect(() => {
+    global.window.__onThemeChange = setTheme;
+  }, []);
+
   return (
     <ToggleSwitch onClick={toggleTheme}>
-      {_theme === Theme.light ? (
+      {theme === Theme.light ? (
         <span>
           <WhiteManaSymbol />
           <span className="sr-only">Light theme</span>

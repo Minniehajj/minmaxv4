@@ -1,20 +1,18 @@
 import NavSVG from "@/public/minmax_rgb.svg";
 import Link from "next/link";
-import {
-  HomeIcon,
-  PersonIcon,
-  MagnifyingGlassIcon,
-} from "@radix-ui/react-icons";
-import { NavIcon } from "../NavIcon";
-import ThemeToggleButton from "../ThemeToggleButton/ThemeToggleButton";
 import { cookies } from "next/headers";
 import { Theme } from "../ThemeToggleButton";
 import { NavGroup } from "./NavGroup";
+import dynamic from "next/dynamic";
+
+const ThemeToggleButton = dynamic(
+  () => import("../ThemeToggleButton/ThemeToggleButton"),
+  {
+    ssr: false,
+  }
+);
 
 export const Nav = () => {
-  const theme =
-    cookies().get("theme")?.value === "dark" ? Theme.dark : Theme.light;
-
   return (
     <header className="">
       <nav className="flex items-center justify-between">
@@ -29,7 +27,7 @@ export const Nav = () => {
         </div>
         <div className="flex flex-grow gap-2 sm:gap-12">
           <NavGroup />
-          <ThemeToggleButton theme={theme} />
+          <ThemeToggleButton />
         </div>
       </nav>
     </header>
