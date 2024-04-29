@@ -4,7 +4,7 @@ import forms from "@tailwindcss/forms";
 import radix from "tailwindcss-radix";
 
 const config = {
-  darkMode: ["selector", '[data-theme="dark"]'],
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",

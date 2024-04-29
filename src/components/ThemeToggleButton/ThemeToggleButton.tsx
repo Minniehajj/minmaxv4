@@ -1,28 +1,28 @@
 "use client";
 import BlackManaSymbol from "@/public/black_mana_symbol.svg";
 import WhiteManaSymbol from "@/public/white_mana_symbol.svg";
+import { useTheme } from "next-themes";
 
-import { FC, useEffect, useState } from "react";
 import { Theme } from ".";
 import { ToggleSwitch } from "../ToggleSwitch";
+import { useEffect, useState } from "react";
 
 const ThemeToggleButton = () => {
-  const [theme, setTheme] = useState(global.window?.__theme || "light");
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const isDark = theme === Theme.dark;
 
-  const toggleTheme = () => {
-    global.window?.__setPreferredTheme(
-      theme === Theme.light ? Theme.dark : Theme.light
-    );
-  };
-
-  useEffect(() => {
-    global.window.__onThemeChange = setTheme;
-  }, []);
+  if (!mounted) return null;
 
   return (
-    <ToggleSwitch onClick={toggleTheme} defaultChecked={isDark}>
+    <ToggleSwitch
+      onClick={() => {
+        setTheme(isDark ? Theme.light : Theme.dark);
+      }}
+      defaultChecked={isDark}
+    >
       {!isDark ? (
         <span>
           <WhiteManaSymbol />
