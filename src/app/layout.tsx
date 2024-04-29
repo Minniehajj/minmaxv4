@@ -27,7 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${GeistSans.variable} ${GeistMono.variable}`} lang="en">
+    <html
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: getTheme }} />
       </head>
