@@ -9,8 +9,12 @@ import { ToggleSwitch } from "../ToggleSwitch";
 const ThemeToggleButton = () => {
   const [theme, setTheme] = useState(global.window?.__theme || "light");
 
+  const isDark = theme === Theme.dark;
+
   const toggleTheme = () => {
-    global.window?.__setPreferredTheme(theme === "light" ? "dark" : "light");
+    global.window?.__setPreferredTheme(
+      theme === Theme.light ? Theme.dark : Theme.light
+    );
   };
 
   useEffect(() => {
@@ -18,8 +22,8 @@ const ThemeToggleButton = () => {
   }, []);
 
   return (
-    <ToggleSwitch onClick={toggleTheme} defaultChecked={theme === Theme.dark}>
-      {theme !== Theme.dark ? (
+    <ToggleSwitch onClick={toggleTheme} defaultChecked={isDark}>
+      {!isDark ? (
         <span>
           <WhiteManaSymbol />
           <span className="sr-only">Light theme</span>

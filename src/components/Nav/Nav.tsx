@@ -1,7 +1,5 @@
 import NavSVG from "@/public/minmax_rgb.svg";
 import Link from "next/link";
-import { cookies } from "next/headers";
-import { Theme } from "../ThemeToggleButton";
 import { NavGroup } from "./NavGroup";
 import dynamic from "next/dynamic";
 
