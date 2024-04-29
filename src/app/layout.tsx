@@ -30,7 +30,7 @@ export default function RootLayout({
     <html
       className={`${GeistSans.variable} ${GeistMono.variable}`}
       lang="en"
-      suppressHydrationWarning={true}
+      data-theme="light"
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: getTheme }} />

@@ -18,8 +18,8 @@ const ThemeToggleButton = () => {
   }, []);
 
   return (
-    <ToggleSwitch onClick={toggleTheme}>
-      {theme === Theme.light ? (
+    <ToggleSwitch onClick={toggleTheme} defaultChecked={theme === Theme.dark}>
+      {theme !== Theme.dark ? (
         <span>
           <WhiteManaSymbol />
           <span className="sr-only">Light theme</span>
