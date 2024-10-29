@@ -8,7 +8,7 @@ const cspHeader = `
     object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-ancestors 'none';
+    frame-ancestors 'https://app.contentful.com';
     upgrade-insecure-requests;
 `
 
