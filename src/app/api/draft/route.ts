@@ -4,9 +4,15 @@ import { redirect } from "next/navigation";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const slug = searchParams.get("slug") as string;
+  const slug = searchParams.get("path") as string;
+  // slug is prefixed with a slash like %2Fhow-to-prepare-for-eternal-weekend-when-you-havent-played-magic-in-months
+  // so we need to remove it
+  // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/get
+  // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
-  const { post } = await getPostAndMorePosts(slug, true);
+  const parsedSlug = searchParams.get("path")?.replace(/^\/+/, "");
+
+  const { post } = await getPostAndMorePosts(parsedSlug, true);
 
   if (!post) {
     return new Response("Invalid slug", { status: 401 });
