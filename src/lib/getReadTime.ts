@@ -1,7 +1,10 @@
-const getReadTime = (totalWords: string): number => {
+const getReadTime = (totalWords: string): string => {
   const words = totalWords.split(" ").length;
   const minutes = Math.round(words / 200);
-  return minutes;
+  if (minutes < 1) {
+    return "< 1";
+  }
+  return minutes.toString();
 };
 
 export default getReadTime;
