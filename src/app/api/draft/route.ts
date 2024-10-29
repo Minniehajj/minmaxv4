@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/get
   // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
-  const parsedSlug = searchParams.get("path")?.replace(/^\/+/, "");
+  const parsedSlug = searchParams.get("path")?.replace(/^\/+/, "") as string;
 
   const { post } = await getPostAndMorePosts(parsedSlug, true);
 
