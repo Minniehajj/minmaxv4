@@ -6,7 +6,7 @@ export type HeroProps = {
   image: ImageProps;
   slug: string;
   setBackgroundImage?: (image: string) => void;
-  readTime?: number;
+  readTime?: string;
   authors: {
     title: string;
     twitter: string;
