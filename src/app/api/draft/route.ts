@@ -4,12 +4,7 @@ import { redirect } from "next/navigation";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const secret = searchParams.get("secret");
   const slug = searchParams.get("slug") as string;
-
-  if (secret !== process.env.CONTENTFUL_PREVIEW_SECRET) {
-    return new Response("Invalid token", { status: 401 });
-  }
 
   const { post } = await getPostAndMorePosts(slug, true);
 
