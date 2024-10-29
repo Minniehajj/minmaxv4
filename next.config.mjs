@@ -10,6 +10,7 @@ const cspHeader = `
     form-action 'self';
     frame-ancestors 'https://app.contentful.com';
     upgrade-insecure-requests;
+    X-Frame-Options 'SAMEORIGIN';
 `
 
 const nextConfig = {
