@@ -1,14 +1,15 @@
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { CalendarIcon, TimerIcon } from "@radix-ui/react-icons";
+import type { Metadata, ResolvingMetadata } from "next";
+import { draftMode } from "next/headers";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+
 import { AuthorsGroup } from "@/components/AuthorsGroup";
 import { MarkdownParser } from "@/components/MarkdownParser";
 import { RichText } from "@/components/RichText";
 import { getPostAndMorePosts } from "@/lib/fetch/getPostAndMorePosts";
 import { formatDateTime } from "@/lib/utils";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { CalendarIcon, TimerIcon } from "@radix-ui/react-icons";
-import { Metadata, ResolvingMetadata } from "next";
-import { draftMode } from "next/headers";
-import { notFound } from "next/navigation";
-import Image from "next/image";
 
 type Props = {
   params: { slug: string };

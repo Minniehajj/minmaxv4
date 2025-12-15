@@ -1,7 +1,7 @@
 export const fetchGraphQL = async (
   query: string,
   preview = false
-): Promise<any> => {
+): Promise<{ data: unknown; errors?: unknown }> => {
   try {
     const response = await fetch(
       `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,

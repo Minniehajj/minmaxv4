@@ -1,4 +1,4 @@
-import { PostProps } from "@/types";
+import type { PostProps } from "@/types";
 import { extractPost, extractPostEntries } from "../extract";
 import { POST_GRAPHQL_FIELDS } from "../graphQLFields";
 import { fetchGraphQL } from "./fetchGraphQL";
