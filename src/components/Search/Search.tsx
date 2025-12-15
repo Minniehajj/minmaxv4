@@ -1,5 +1,5 @@
 "use client";
-import algoliasearch from "algoliasearch/lite";
+import { liteClient as algoliasearch } from "algoliasearch/lite";
 
 import { InstantSearchNext } from "react-instantsearch-nextjs";
 import { useHits } from "react-instantsearch";
@@ -7,6 +7,7 @@ import AlgoliaSVG from "@/public/algolia.svg";
 import { Hits } from "./Hits";
 
 import { SearchBox } from "./SearchBox";
+
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID as string,
   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY as string,

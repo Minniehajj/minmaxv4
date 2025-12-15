@@ -31,7 +31,11 @@ export async function getAllPostSlugs(isDraftMode: boolean): Promise<SlugTotals>
     isDraftMode
   );
 
-  const items = entries?.data?.postCollection?.items ?? [];
+  const data = entries?.data as
+    | { postCollection?: { items?: { slug: string }[] } }
+    | undefined;
+
+  const items = data?.postCollection?.items ?? [];
   const totalPosts = items.length;
   const totalPages = totalPosts > 0 ? Math.ceil(totalPosts / 6) : 0;
   const paths: { params: { slug: string } }[] = [];
@@ -121,8 +125,8 @@ export async function getAllPostSlugsByAuthor(
   const entries = await fetchGraphQL(
     `query {
       authorCollection(limit: 1, where: { slug: "${authorSlug}" }, preview: ${
-      isDraftMode ? "true" : "false"
-    }) {
+        isDraftMode ? "true" : "false"
+      }) {
         items {
           linkedFrom {
             postCollection(preview: ${isDraftMode ? "true" : "false"}) {
@@ -136,9 +140,20 @@ export async function getAllPostSlugsByAuthor(
     }`,
     isDraftMode
   );
+
+  const data = entries?.data as
+    | {
+        authorCollection?: {
+          items?: {
+            linkedFrom?: { postCollection?: { items?: { slug: string }[] } };
+          }[];
+        };
+      }
+    | undefined;
+
   const items =
-    entries?.data?.authorCollection?.items?.[0]?.linkedFrom?.postCollection
-      ?.items ?? [];
+    data?.authorCollection?.items?.[0]?.linkedFrom?.postCollection?.items ?? [];
+
   const totalPosts = items.length;
   const totalPages = totalPosts > 0 ? Math.ceil(totalPosts / 6) : 0;
   const paths: { params: { slug: string } }[] = [];
