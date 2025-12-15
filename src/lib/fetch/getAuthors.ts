@@ -1,6 +1,6 @@
-import { Author, PostProps } from "@/types";
-import { extractAuthors, extractPost, extractPostEntries } from "../extract";
-import { AUTHOR_GRAPHQL_FIELDS, POST_GRAPHQL_FIELDS } from "../graphQLFields";
+import { Author } from "@/types";
+import { extractAuthors } from "../extract";
+import { AUTHOR_GRAPHQL_FIELDS } from "../graphQLFields";
 import { fetchGraphQL } from "./fetchGraphQL";
 
 export const getAuthors = async (
@@ -8,7 +8,7 @@ export const getAuthors = async (
 ): Promise<{
   authors: Author[];
 }> => {
-  const authors = await fetchGraphQL(
+  const response = await fetchGraphQL(
     `query {
       authorCollection(preview: ${preview ? "true" : "false"}) {
         items {
@@ -20,6 +20,6 @@ export const getAuthors = async (
   );
 
   return {
-    authors: extractAuthors(authors.data),
+    authors: extractAuthors(response?.data ?? {}),
   };
 };

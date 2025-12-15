@@ -7,7 +7,7 @@ export const getPostAndMorePosts = async (
   slug: string,
   preview: boolean
 ): Promise<{
-  post: PostProps;
+  post: PostProps | null;
   morePosts: PostProps[];
 }> => {
   const entry = await fetchGraphQL(
@@ -35,7 +35,7 @@ export const getPostAndMorePosts = async (
     preview
   );
   return {
-    post: extractPost(entry.data),
-    morePosts: extractPostEntries(entries.data),
+    post: extractPost(entry?.data ?? {}),
+    morePosts: extractPostEntries(entries?.data ?? {}),
   };
 };

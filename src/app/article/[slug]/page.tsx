@@ -7,6 +7,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { CalendarIcon, TimerIcon } from "@radix-ui/react-icons";
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 
 type Props = {
@@ -17,12 +18,13 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // fetch data
   const { isEnabled } = draftMode();
-
   const { post } = await getPostAndMorePosts(params.slug, isEnabled);
 
-  // optionally access and extend (rather than replace) parent metadata
+  if (!post) {
+    return { title: "Post not found" };
+  }
+
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
@@ -30,14 +32,10 @@ export async function generateMetadata(
     openGraph: {
       images: [...previousImages, post.heroImage.url],
     },
-    authors: [
-      ...post.authorsCollection.items.map((author) => {
-        return {
-          name: author.title,
-          twitter: author.twitter,
-        };
-      }),
-    ],
+    authors: post.authorsCollection.items.map((author) => ({
+      name: author.title,
+      twitter: author.twitter,
+    })),
     description: post.metaDescription,
   };
 }
@@ -46,9 +44,13 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
   const { isEnabled } = draftMode();
   const { post } = await getPostAndMorePosts(params.slug, isEnabled);
 
+  if (!post) {
+    notFound();
+  }
+
   return (
     <main className="pt-2 pb-12">
-      <div className="prose m-auto mb-8 text-center dark:prose-invert lg:prose-2xl flex flex-col items-center">
+      <div className="prose m-auto mb-8 flex flex-col items-center text-center dark:prose-invert lg:prose-2xl">
         <h1 className="!my-0">{post.title}</h1>
         <div className="flex gap-4">
           <p className="flex items-center gap-2 text-base !my-0">
@@ -90,9 +92,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
       )}
       <div
         className="fixed top-0 left-0 -z-10 h-full min-h-[1080px] w-full bg-theme-white bg-cover bg-center bg-no-repeat bg-blend-screen dark:bg-theme-black dark:bg-blend-multiply"
-        style={
-          post.heroImage && { backgroundImage: `url(${post.heroImage.url})` }
-        }
+        style={post.heroImage ? { backgroundImage: `url(${post.heroImage.url})` } : {}}
       />
     </main>
   );
